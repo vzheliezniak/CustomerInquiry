@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerInquiry", "Customer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessTests", "BusinessTests\BusinessTests.csproj", "{81726004-30C8-4411-B014-46E5B1EEFFEF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{D571E9F8-4767-4D38-9BDC-FAFC06870D6D}"
+	ProjectSection(SolutionItems) = preProject
+		CreateDatabaseStructure.sql = CreateDatabaseStructure.sql
+		PopulateDatabaseWithTestData.sql = PopulateDatabaseWithTestData.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
