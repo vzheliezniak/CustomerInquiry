@@ -1,12 +1,9 @@
 ﻿using Business.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Business.Abstract
 {
     public interface ICustomerInquiryManager
     {
-        CustomerDetails GetCustomer(decimal customerId, string email);
+        CustomerProfile GetCustomerProfile(decimal customerId = 0, string email = null);
     }
 }

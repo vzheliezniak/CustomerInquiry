@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Business.Abstract;
+using Business.Implementation;
+using DataAccess.Abstract;
+using DataAccess.Implementation;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,8 +32,11 @@ namespace CustomersInquiry
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<CustomersInquiryDBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<CustomersInquiryDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("LocalDb")));
+
+            services.AddScoped<ICustomerInquiryManager, CustomerInquiryManager>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

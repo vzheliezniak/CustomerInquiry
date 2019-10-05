@@ -15,6 +15,6 @@ namespace DataAccess.Models
         public string Email { get; set; }
         public decimal? MobilePhone { get; set; }
 
-        public virtual ICollection<Transaction> Transaction { get; set; }
+        public ICollection<Transaction> Transaction { get; set; }
     }
 }

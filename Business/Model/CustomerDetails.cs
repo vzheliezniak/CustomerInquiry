@@ -2,9 +2,9 @@
 
 namespace Business.Model
 {
-    public class CustomerDetails
+    public class CustomerProfile
     {
-        public CustomerDetails()
+        public CustomerProfile()
         {
             RecentTransactions = new List<TransactionDetails>();
         }
