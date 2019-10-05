@@ -20,5 +20,5 @@ CREATE TABLE [Transaction](
 	Amount DECIMAL (5, 2) NOT NULL,
 	CurrencyCode VARCHAR (3) NOT NULL DEFAULT 'USD',
 	[StatusID] INT FOREIGN KEY REFERENCES StatusLookup(StatusID),
-	CustomerID INT FOREIGN KEY REFERENCES Customer(CustomerID)
+	CustomerID NUMERIC(10) FOREIGN KEY REFERENCES Customer(CustomerID)
 );
