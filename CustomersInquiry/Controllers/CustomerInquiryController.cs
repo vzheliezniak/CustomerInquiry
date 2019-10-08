@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using Business.Abstract;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.RegularExpressions;
 using Business.Model;
 
 namespace CustomersInquiry.Controllers
@@ -17,14 +11,17 @@ namespace CustomersInquiry.Controllers
     {
         private readonly ICustomerInquiryManager _customerInquiryManager;
 
+        private const string InvalidCustomerId = "Invalid Customer ID";
+        private const string InvalidEmail = "Invalid Email";
+
         public CustomerInquiryController(ICustomerInquiryManager customerInquiryManager)
         {
             _customerInquiryManager = customerInquiryManager;
         }
 
         [HttpGet("customerProfile")]
-        public ActionResult GetCustomerProfile([FromQuery, RegularExpression("[0-9]{1,10}", ErrorMessage="CustomerId is not valid")] decimal customerId, 
-            [FromQuery, EmailAddress, StringLength(25)] string email)
+        public ActionResult GetCustomerProfile([FromQuery, RegularExpression("[0-9]{1,10}", ErrorMessage=InvalidCustomerId)] decimal customerId, 
+            [FromQuery, EmailAddress(ErrorMessage = InvalidEmail), StringLength(25, ErrorMessage = InvalidEmail)] string email)
         {
             if(customerId == decimal.Zero && string.IsNullOrEmpty(email))
             {

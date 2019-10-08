@@ -46,7 +46,16 @@ namespace BusinessTests
             var res = _sut.Object.GetCustomerProfile(customerId);
 
             Assert.IsNotEmpty(res.RecentTransactions);
-            Assert.AreEqual(expectedAmountOfTransactions, res.RecentTransactions.Count());
+            Assert.AreEqual(expectedAmountOfTransactions, res.RecentTransactions.Count);
+        }
+
+        [Test]
+        public void GetCustomerProfile_CustomerIdIsValid_EmailIsNotValid_CustomerIsNotFoundExceptionIsThrown()
+        {
+            const decimal customerId = 61995;
+            const string email = "test@gmail.com";
+
+            Assert.Throws<CustomerNotFoundException>(() => _sut.Object.GetCustomerProfile(customerId, email));
         }
     }
 }

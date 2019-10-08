@@ -1,7 +1,9 @@
-﻿using Business.Abstract;
+﻿using System;
+using Business.Abstract;
 using Business.Model;
 using DataAccess.Abstract;
 using System.Linq;
+using DataAccess.Models;
 
 namespace Business.Implementation
 {
@@ -15,7 +17,21 @@ namespace Business.Implementation
         
         public CustomerProfile GetCustomerProfile(decimal customerId = 0, string email = null)
         {
-            var customer = customerId != 0 ? _customerRepository.GetCustomerWithTransactionsByFilter(x => x.CustomerId == customerId) : _customerRepository.GetCustomerWithTransactionsByFilter(x => x.Email == email);
+            Func<Customer, bool> filter;
+            if (customerId != 0 && !string.IsNullOrEmpty(email))
+            {
+                filter = x => x.CustomerId == customerId && x.Email == email;
+            }
+            else if(customerId != 0)
+            {
+                filter = x => x.CustomerId == customerId;
+            }
+            else
+            {
+                filter = x => x.Email == email;
+            }
+
+            var customer = _customerRepository.GetCustomerWithTransactionsByFilter(filter); 
             if(customer == null)
             {
                 throw new CustomerNotFoundException($"Customer is not found");
