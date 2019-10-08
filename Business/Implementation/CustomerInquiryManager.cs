@@ -31,13 +31,12 @@ namespace Business.Implementation
                 filter = x => x.Email == email;
             }
 
-            var customer = _customerRepository.GetCustomerWithTransactionsByFilter(filter); 
+            const int amountOfRecentTransaction = 5;
+            var customer = _customerRepository.GetCustomerWithRecentTransactionsByFilter(filter, amountOfRecentTransaction); 
             if(customer == null)
             {
                 throw new CustomerNotFoundException($"Customer is not found");
             }
-
-            const int amountOfRecentTransaction = 5;
             
             return new CustomerProfile
             {
@@ -45,8 +44,7 @@ namespace Business.Implementation
                 Name = customer.Name,
                 Email = customer.Email,
                 Phone = customer.MobilePhone ?? 000,
-                RecentTransactions = customer.Transaction.OrderByDescending(x => x.Date)
-                    .Take(amountOfRecentTransaction)
+                RecentTransactions = customer.Transaction
                     .Select(x => new TransactionDetails
                     {
                         Id = x.TransactionId,
@@ -56,7 +54,6 @@ namespace Business.Implementation
                         Date = x.Date 
                     }).ToList()
             };
-
         }
     }
 }

@@ -16,8 +16,9 @@ namespace BusinessTests
         public void Setup()
         {
             var repository = new Mock<ICustomerRepository>();
-            repository.Setup(x => x.GetCustomerWithTransactionsByFilter(It.IsAny<Func<Customer, bool>>()))
-                .Returns((Func<Customer, bool> predicate) => MockData.GetCustomers().Where(predicate).FirstOrDefault());
+            repository.Setup(x => x.GetCustomerWithRecentTransactionsByFilter(It.IsAny<Func<Customer, bool>>(), It.IsAny<int>()))
+                .Returns((Func<Customer, bool> predicate, int amount) => MockData.GetCustomers().Where(predicate).FirstOrDefault());
+
             _sut = new Mock<CustomerInquiryManager>(repository.Object);
         }
 
@@ -35,18 +36,6 @@ namespace BusinessTests
 
             Assert.NotNull(res);
             Assert.IsEmpty(res.RecentTransactions);
-        }
-
-        [Test]
-        public void GetCustomerProfile_CustomerIsFound_CustomerIsFound_CustomerProfileWithListOfRecentTransactionsIsReturned()
-        {
-            const decimal customerId = 61995;
-            const int expectedAmountOfTransactions = 5;
-
-            var res = _sut.Object.GetCustomerProfile(customerId);
-
-            Assert.IsNotEmpty(res.RecentTransactions);
-            Assert.AreEqual(expectedAmountOfTransactions, res.RecentTransactions.Count);
         }
 
         [Test]

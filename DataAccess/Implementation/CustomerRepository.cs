@@ -16,9 +16,17 @@ namespace DataAccess.Implementation
 
         }
 
-        public Customer GetCustomerWithTransactionsByFilter(Func<Customer, bool> filter)
+        public Customer GetCustomerWithAllTransactionsByFilter(Func<Customer, bool> filter)
         {
             return dbContext.Customer.Include(x => x.Transaction).FirstOrDefault(filter);
+        }
+
+        public Customer GetCustomerWithRecentTransactionsByFilter(Func<Customer, bool> filter, int amountOfTransactionToTake)
+        {
+            return dbContext.Customer.Include(x => x.Transaction
+                    .OrderByDescending(t => t.Date)
+                    .Take(amountOfTransactionToTake))
+                .FirstOrDefault(filter);
         }
     }
 }
