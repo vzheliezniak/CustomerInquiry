@@ -3,7 +3,7 @@
 USE  [CustomersInquiryDB]
 
 CREATE TABLE Customer(
-	CustomerID NUMERIC(10) IDENTITY(1, 1) PRIMARY KEY, 
+	CustomerID INT IDENTITY(1, 1) PRIMARY KEY, 
 	[Name] VARCHAR(30) NOT NULL, 
 	Email VARCHAR(25) NOT NULL, 
 	MobilePhone NUMERIC(10)
@@ -15,5 +15,5 @@ CREATE TABLE [Transaction](
 	Amount DECIMAL (5, 2) NOT NULL,
 	CurrencyCode VARCHAR (3) NOT NULL DEFAULT 'USD',
 	[Status] VARCHAR(15) NOT NULL,
-	CustomerID NUMERIC(10) NOT NULL FOREIGN KEY REFERENCES Customer(CustomerID)
+	CustomerID INT NOT NULL FOREIGN KEY REFERENCES Customer(CustomerID)
 );

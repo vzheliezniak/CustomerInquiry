@@ -30,7 +30,7 @@ namespace BusinessTests
 
         [TestCase(395, null)]
         [TestCase(0, "p@gmail.com")]
-        public void GetCustomerProfile_CustomerIsFound_CustomerProfileWithNoTransactionsIsReturned(decimal customerId, string email)
+        public void GetCustomerProfile_CustomerIsFound_CustomerProfileWithNoTransactionsIsReturned(int customerId, string email)
         {
             var res = _sut.Object.GetCustomerProfile(customerId, email);
 
@@ -41,7 +41,7 @@ namespace BusinessTests
         [Test]
         public void GetCustomerProfile_CustomerIdIsValid_EmailIsNotValid_CustomerIsNotFoundExceptionIsThrown()
         {
-            const decimal customerId = 61995;
+            const int customerId = 61995;
             const string email = "test@gmail.com";
 
             Assert.Throws<CustomerNotFoundException>(() => _sut.Object.GetCustomerProfile(customerId, email));

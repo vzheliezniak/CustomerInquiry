@@ -10,7 +10,7 @@ namespace DataAccess.Models
             Transaction = new HashSet<Transaction>();
         }
 
-        public decimal CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public decimal? MobilePhone { get; set; }

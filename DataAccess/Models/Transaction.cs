@@ -10,7 +10,7 @@ namespace DataAccess.Models
         public decimal Amount { get; set; }
         public string CurrencyCode { get; set; }
         public string Status { get; set; }
-        public decimal CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         public Customer Customer { get; set; }
     }

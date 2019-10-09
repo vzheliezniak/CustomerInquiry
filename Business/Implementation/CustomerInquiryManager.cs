@@ -15,7 +15,7 @@ namespace Business.Implementation
             _customerRepository = customerRepository;
         }
         
-        public CustomerProfile GetCustomerProfile(decimal customerId = 0, string email = null)
+        public CustomerProfile GetCustomerProfile(int customerId = 0, string email = null)
         {
             Func<Customer, bool> filter;
             if (customerId != 0 && !string.IsNullOrEmpty(email))

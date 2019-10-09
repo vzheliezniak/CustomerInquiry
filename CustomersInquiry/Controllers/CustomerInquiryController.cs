@@ -20,7 +20,7 @@ namespace CustomersInquiry.Controllers
         }
 
         [HttpGet("customerProfile")]
-        public ActionResult GetCustomerProfile([FromQuery, RegularExpression("[0-9]{1,10}", ErrorMessage=InvalidCustomerId)] decimal customerId, 
+        public ActionResult GetCustomerProfile([FromQuery, RegularExpression("[0-9]{1,10}", ErrorMessage=InvalidCustomerId)] int customerId, 
             [FromQuery, EmailAddress(ErrorMessage = InvalidEmail), StringLength(25, ErrorMessage = InvalidEmail)] string email)
         {
             if(customerId == decimal.Zero && string.IsNullOrEmpty(email))

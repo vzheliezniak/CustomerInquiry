@@ -22,10 +22,7 @@ namespace DataAccess.Models
         {
             modelBuilder.Entity<Customer>(entity =>
             {
-                entity.Property(e => e.CustomerId)
-                    .HasColumnName("CustomerID")
-                    .HasColumnType("numeric(10, 0)")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -52,9 +49,7 @@ namespace DataAccess.Models
                     .IsUnicode(false)
                     .HasDefaultValueSql("('USD')");
 
-                entity.Property(e => e.CustomerId)
-                    .HasColumnName("CustomerID")
-                    .HasColumnType("numeric(10, 0)");
+                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
                 entity.Property(e => e.Date)
                     .HasColumnType("datetime")
@@ -69,7 +64,7 @@ namespace DataAccess.Models
                     .WithMany(p => p.Transaction)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Transacti__Custo__4222D4EF");
+                    .HasConstraintName("FK__Transacti__Custo__276EDEB3");
             });
         }
     }

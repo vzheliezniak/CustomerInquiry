@@ -4,6 +4,6 @@ namespace Business.Abstract
 {
     public interface ICustomerInquiryManager
     {
-        CustomerProfile GetCustomerProfile(decimal customerId = 0, string email = null);
+        CustomerProfile GetCustomerProfile(int customerId = 0, string email = null);
     }
 }
